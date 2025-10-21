@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "created": "2025-10-21",
+  "galaxy_count": 43,
+  "sources": [
+    {
+      "name": "Caltech NED Local Group Database",
+      "url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+      "description": "Primary source for Local Group galaxy catalog"
+    },
+    {
+      "name": "McConnachie 2012",
+      "citation": "McConnachie, A. W. 2012, AJ, 144, 4",
+      "description": "The Observed Properties of Dwarf Galaxies in and around the Local Group"
+    },
+    {
+      "name": "NASA Extragalactic Database",
+      "url": "https://ned.ipac.caltech.edu/",
+      "description": "Distance measurements and photometry"
+    }
+  ],
+  "coordinate_system": "Equatorial J2000.0, converted to Cartesian (kpc)",
+  "notes": "Distances in kiloparsecs (kpc). 1 kpc = 3,260.47 light-years"
+}

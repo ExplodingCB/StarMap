@@ -1,0 +1,176 @@
+.legend {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 320px;
+  background: var(--md-sys-color-surface);
+  border-radius: var(--md-sys-shape-corner-extra-large);
+  box-shadow: var(--md-sys-elevation-2);
+  z-index: 1000;
+  color: var(--md-sys-color-on-surface);
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 251, 254, 0.95);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.legend.collapsed {
+  width: auto;
+}
+
+.legend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-weight: 500;
+  font-size: var(--md-sys-typescale-title-medium-size);
+  letter-spacing: 0.1px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.legend-header:hover {
+  background: rgba(103, 80, 164, 0.08);
+}
+
+.legend.collapsed .legend-header:hover {
+  border-radius: var(--md-sys-shape-corner-extra-large);
+}
+
+.legend-toggle {
+  color: var(--md-sys-color-on-surface-variant);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.legend-toggle svg {
+  display: block;
+  color: currentColor;
+}
+
+.legend-content {
+  padding: 8px 12px 16px 12px;
+}
+
+.legend-item {
+  padding: 0;
+  margin-bottom: 4px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--md-sys-shape-corner-medium);
+}
+
+.legend-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Custom checkbox wrapper */
+.legend-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: var(--md-sys-shape-corner-medium);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.legend-checkbox-wrapper:hover {
+  background: rgba(103, 80, 164, 0.05);
+}
+
+/* Hide native checkbox */
+.hidden-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Custom checkbox design - M3 style */
+.checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: var(--md-sys-shape-corner-extra-small);
+  margin-right: 12px;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+}
+
+.hidden-checkbox:checked + .checkbox-custom {
+  background: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-primary);
+}
+
+/* Checkmark */
+.checkbox-custom::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.hidden-checkbox:checked + .checkbox-custom::after {
+  display: block;
+}
+
+/* Color indicator */
+.legend-color {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--md-sys-shape-corner-full);
+  margin-right: 12px;
+  flex-shrink: 0;
+  box-shadow: var(--md-sys-elevation-1);
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.legend-color::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--md-sys-shape-corner-full);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Dim when disabled */
+.hidden-checkbox:not(:checked) ~ .legend-color {
+  opacity: 0.3;
+  filter: grayscale(0.5);
+}
+
+.legend-text {
+  flex: 1;
+  transition: opacity 0.2s;
+}
+
+/* Dim text when disabled */
+.hidden-checkbox:not(:checked) ~ .legend-text {
+  opacity: 0.4;
+}
+
+.legend-type {
+  font-size: var(--md-sys-typescale-body-large-size);
+  font-weight: 500;
+  margin-bottom: 2px;
+  color: var(--md-sys-color-on-surface);
+  letter-spacing: 0.15px;
+}
+
+.legend-example {
+  font-size: var(--md-sys-typescale-body-medium-size);
+  color: var(--md-sys-color-on-surface-variant);
+  letter-spacing: 0.25px;
+}

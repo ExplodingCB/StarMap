@@ -1,0 +1,1144 @@
+[
+  {
+    "id": "milky_way",
+    "name": "Milky Way",
+    "alternate_names": [
+      "MW",
+      "Galaxy"
+    ],
+    "type": "SBbc",
+    "coordinates": {
+      "ra": "17:45:40",
+      "dec": "-29:00:28",
+      "ra_deg": 266.416667,
+      "dec_deg": -29.007778
+    },
+    "position_3d": {
+      "x": -0.0,
+      "y": -0.0,
+      "z": -0.0
+    },
+    "distance_kpc": 0,
+    "distance_uncertainty_kpc": 0.0,
+    "size_estimate_kpc": 50,
+    "morphological_type": "SBbc",
+    "notes": "Our home galaxy",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "andromeda_m31",
+    "name": "Andromeda (M31)",
+    "alternate_names": [
+      "M31",
+      "NGC 224"
+    ],
+    "type": "Sb",
+    "coordinates": {
+      "ra": "00:42:44.3",
+      "dec": "+41:16:09",
+      "ra_deg": 10.684583,
+      "dec_deg": 41.269167
+    },
+    "position_3d": {
+      "x": 568.71,
+      "y": 107.3,
+      "z": 507.89
+    },
+    "distance_kpc": 770,
+    "distance_uncertainty_kpc": 38.5,
+    "size_estimate_kpc": 110,
+    "morphological_type": "Sb",
+    "notes": "Nearest large galaxy to Milky Way",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "triangulum_m33",
+    "name": "Triangulum (M33)",
+    "alternate_names": [
+      "M33",
+      "NGC 598"
+    ],
+    "type": "Sc",
+    "coordinates": {
+      "ra": "01:33:50.9",
+      "dec": "+30:39:37",
+      "ra_deg": 23.462083,
+      "dec_deg": 30.660278
+    },
+    "position_3d": {
+      "x": 686.51,
+      "y": 297.96,
+      "z": 443.65
+    },
+    "distance_kpc": 870,
+    "distance_uncertainty_kpc": 43.5,
+    "size_estimate_kpc": 30,
+    "morphological_type": "Sc",
+    "notes": "Third-largest Local Group galaxy",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "large_magellanic_cloud",
+    "name": "Large Magellanic Cloud",
+    "alternate_names": [
+      "LMC"
+    ],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "05:23:34",
+      "dec": "-69:45:22",
+      "ra_deg": 80.891667,
+      "dec_deg": -69.756111
+    },
+    "position_3d": {
+      "x": 2.74,
+      "y": 17.08,
+      "z": -46.91
+    },
+    "distance_kpc": 50,
+    "distance_uncertainty_kpc": 2.5,
+    "size_estimate_kpc": 9.9,
+    "morphological_type": "Irr",
+    "notes": "Largest MW satellite",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "small_magellanic_cloud",
+    "name": "Small Magellanic Cloud",
+    "alternate_names": [
+      "SMC",
+      "NGC 292"
+    ],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "00:52:38",
+      "dec": "-72:48:01",
+      "ra_deg": 13.158333,
+      "dec_deg": -72.800278
+    },
+    "position_3d": {
+      "x": 17.56,
+      "y": 4.11,
+      "z": -58.27
+    },
+    "distance_kpc": 61,
+    "distance_uncertainty_kpc": 3.1,
+    "size_estimate_kpc": 5.8,
+    "morphological_type": "Irr",
+    "notes": "Second-largest MW satellite",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "sagittarius_dwarf",
+    "name": "Sagittarius Dwarf",
+    "alternate_names": [
+      "Sgr dSph"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "18:55:03",
+      "dec": "-30:28:42",
+      "ra_deg": 283.7625,
+      "dec_deg": -30.478333
+    },
+    "position_3d": {
+      "x": 5.33,
+      "y": -21.76,
+      "z": -13.19
+    },
+    "distance_kpc": 26,
+    "distance_uncertainty_kpc": 1.3,
+    "size_estimate_kpc": 5.0,
+    "morphological_type": "dSph",
+    "notes": "Currently merging with MW",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "ursa_minor_dwarf",
+    "name": "Ursa Minor Dwarf",
+    "alternate_names": [
+      "UMi dSph"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "15:09:11",
+      "dec": "+67:13:00",
+      "ra_deg": 227.295833,
+      "dec_deg": 67.216667
+    },
+    "position_3d": {
+      "x": -19.96,
+      "y": -21.63,
+      "z": 70.07
+    },
+    "distance_kpc": 76,
+    "distance_uncertainty_kpc": 3.8,
+    "size_estimate_kpc": 0.44,
+    "morphological_type": "dSph",
+    "notes": "Classical dwarf spheroidal",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "draco_dwarf",
+    "name": "Draco Dwarf",
+    "alternate_names": [
+      "Dra dSph"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "17:20:19",
+      "dec": "+57:54:48",
+      "ra_deg": 260.079167,
+      "dec_deg": 57.913333
+    },
+    "position_3d": {
+      "x": -7.5,
+      "y": -42.91,
+      "z": 69.47
+    },
+    "distance_kpc": 82,
+    "distance_uncertainty_kpc": 4.1,
+    "size_estimate_kpc": 0.71,
+    "morphological_type": "dSph",
+    "notes": "Classical dwarf spheroidal",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "sculptor_dwarf",
+    "name": "Sculptor Dwarf",
+    "alternate_names": [
+      "Scl dSph"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "01:00:09",
+      "dec": "-33:42:33",
+      "ra_deg": 15.0375,
+      "dec_deg": -33.709167
+    },
+    "position_3d": {
+      "x": 69.09,
+      "y": 18.56,
+      "z": -47.73
+    },
+    "distance_kpc": 86,
+    "distance_uncertainty_kpc": 4.3,
+    "size_estimate_kpc": 0.94,
+    "morphological_type": "dSph",
+    "notes": "Classical dwarf spheroidal",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "carina_dwarf",
+    "name": "Carina Dwarf",
+    "alternate_names": [
+      "Car dSph"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "06:41:37",
+      "dec": "-50:57:58",
+      "ra_deg": 100.404167,
+      "dec_deg": -50.966111
+    },
+    "position_3d": {
+      "x": -11.94,
+      "y": 65.04,
+      "z": -81.56
+    },
+    "distance_kpc": 105,
+    "distance_uncertainty_kpc": 5.2,
+    "size_estimate_kpc": 0.55,
+    "morphological_type": "dSph",
+    "notes": "Classical dwarf spheroidal",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "sextans_dwarf",
+    "name": "Sextans Dwarf",
+    "alternate_names": [
+      "Sex dSph"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "10:13:03",
+      "dec": "-01:36:53",
+      "ra_deg": 153.2625,
+      "dec_deg": -1.614722
+    },
+    "position_3d": {
+      "x": -76.77,
+      "y": 38.68,
+      "z": -2.42
+    },
+    "distance_kpc": 86,
+    "distance_uncertainty_kpc": 4.3,
+    "size_estimate_kpc": 1.62,
+    "morphological_type": "dSph",
+    "notes": "Classical dwarf spheroidal",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "fornax_dwarf",
+    "name": "Fornax Dwarf",
+    "alternate_names": [
+      "For dSph"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "02:39:59",
+      "dec": "-34:26:57",
+      "ra_deg": 39.995833,
+      "dec_deg": -34.449167
+    },
+    "position_3d": {
+      "x": 92.87,
+      "y": 77.91,
+      "z": -83.15
+    },
+    "distance_kpc": 147,
+    "distance_uncertainty_kpc": 7.4,
+    "size_estimate_kpc": 2.1,
+    "morphological_type": "dSph",
+    "notes": "Classical dwarf spheroidal with GCs",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "leo_i",
+    "name": "Leo I",
+    "alternate_names": [
+      "Leo I dSph"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "10:08:28",
+      "dec": "+12:18:23",
+      "ra_deg": 152.116667,
+      "dec_deg": 12.306389
+    },
+    "position_3d": {
+      "x": -219.35,
+      "y": 116.06,
+      "z": 54.14
+    },
+    "distance_kpc": 254,
+    "distance_uncertainty_kpc": 12.7,
+    "size_estimate_kpc": 0.51,
+    "morphological_type": "dSph",
+    "notes": "Classical dwarf spheroidal",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "leo_ii",
+    "name": "Leo II",
+    "alternate_names": [
+      "Leo II dSph"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "11:13:29",
+      "dec": "+22:09:11",
+      "ra_deg": 168.370833,
+      "dec_deg": 22.153056
+    },
+    "position_3d": {
+      "x": -211.37,
+      "y": 43.5,
+      "z": 87.86
+    },
+    "distance_kpc": 233,
+    "distance_uncertainty_kpc": 11.7,
+    "size_estimate_kpc": 0.35,
+    "morphological_type": "dSph",
+    "notes": "Classical dwarf spheroidal",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "m32",
+    "name": "M32",
+    "alternate_names": [
+      "NGC 221"
+    ],
+    "type": "cE",
+    "coordinates": {
+      "ra": "00:42:41.8",
+      "dec": "+40:51:55",
+      "ra_deg": 10.674167,
+      "dec_deg": 40.865278
+    },
+    "position_3d": {
+      "x": 598.25,
+      "y": 112.76,
+      "z": 526.7
+    },
+    "distance_kpc": 805,
+    "distance_uncertainty_kpc": 40.2,
+    "size_estimate_kpc": 2.5,
+    "morphological_type": "cE",
+    "notes": "Compact elliptical, M31 satellite",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "m110",
+    "name": "M110",
+    "alternate_names": [
+      "NGC 205"
+    ],
+    "type": "dE",
+    "coordinates": {
+      "ra": "00:40:22.1",
+      "dec": "+41:41:07",
+      "ra_deg": 10.092083,
+      "dec_deg": 41.685278
+    },
+    "position_3d": {
+      "x": 595.56,
+      "y": 106.0,
+      "z": 538.68
+    },
+    "distance_kpc": 810,
+    "distance_uncertainty_kpc": 40.5,
+    "size_estimate_kpc": 5.2,
+    "morphological_type": "dE",
+    "notes": "Dwarf elliptical, M31 satellite",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "ngc_147",
+    "name": "NGC 147",
+    "alternate_names": [
+      "DDO 3"
+    ],
+    "type": "dE",
+    "coordinates": {
+      "ra": "00:33:12.1",
+      "dec": "+48:30:32",
+      "ra_deg": 8.300417,
+      "dec_deg": 48.508889
+    },
+    "position_3d": {
+      "x": 475.28,
+      "y": 69.34,
+      "z": 543.07
+    },
+    "distance_kpc": 725,
+    "distance_uncertainty_kpc": 36.2,
+    "size_estimate_kpc": 2.3,
+    "morphological_type": "dE",
+    "notes": "M31 satellite",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "ngc_185",
+    "name": "NGC 185",
+    "alternate_names": [],
+    "type": "dE",
+    "coordinates": {
+      "ra": "00:38:58.0",
+      "dec": "+48:20:15",
+      "ra_deg": 9.741667,
+      "dec_deg": 48.3375
+    },
+    "position_3d": {
+      "x": 406.2,
+      "y": 69.74,
+      "z": 463.19
+    },
+    "distance_kpc": 620,
+    "distance_uncertainty_kpc": 31.0,
+    "size_estimate_kpc": 2.0,
+    "morphological_type": "dE",
+    "notes": "M31 satellite",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "andromeda_i",
+    "name": "Andromeda I",
+    "alternate_names": [
+      "And I"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "00:45:42",
+      "dec": "+38:02:28",
+      "ra_deg": 11.425,
+      "dec_deg": 38.041111
+    },
+    "position_3d": {
+      "x": 575.11,
+      "y": 116.22,
+      "z": 459.09
+    },
+    "distance_kpc": 745,
+    "distance_uncertainty_kpc": 37.2,
+    "size_estimate_kpc": 0.78,
+    "morphological_type": "dSph",
+    "notes": "M31 dwarf spheroidal satellite",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "andromeda_ii",
+    "name": "Andromeda II",
+    "alternate_names": [
+      "And II"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "01:16:30",
+      "dec": "+33:25:09",
+      "ra_deg": 19.125,
+      "dec_deg": 33.419167
+    },
+    "position_3d": {
+      "x": 516.53,
+      "y": 179.12,
+      "z": 360.75
+    },
+    "distance_kpc": 655,
+    "distance_uncertainty_kpc": 32.8,
+    "size_estimate_kpc": 1.27,
+    "morphological_type": "dSph",
+    "notes": "M31 dwarf spheroidal satellite",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "andromeda_iii",
+    "name": "Andromeda III",
+    "alternate_names": [
+      "And III"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "00:35:34",
+      "dec": "+36:29:52",
+      "ra_deg": 8.891667,
+      "dec_deg": 36.497778
+    },
+    "position_3d": {
+      "x": 594.08,
+      "y": 92.94,
+      "z": 444.9
+    },
+    "distance_kpc": 748,
+    "distance_uncertainty_kpc": 37.4,
+    "size_estimate_kpc": 0.71,
+    "morphological_type": "dSph",
+    "notes": "M31 dwarf spheroidal satellite",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "ic_10",
+    "name": "IC 10",
+    "alternate_names": [],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "00:20:17.3",
+      "dec": "+59:18:14",
+      "ra_deg": 5.072083,
+      "dec_deg": 59.303889
+    },
+    "position_3d": {
+      "x": 335.6,
+      "y": 29.79,
+      "z": 567.53
+    },
+    "distance_kpc": 660,
+    "distance_uncertainty_kpc": 33.0,
+    "size_estimate_kpc": 1.5,
+    "morphological_type": "Irr",
+    "notes": "Irregular starburst galaxy",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "ic_1613",
+    "name": "IC 1613",
+    "alternate_names": [],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "01:04:47.8",
+      "dec": "+02:07:04",
+      "ra_deg": 16.199167,
+      "dec_deg": 2.117778
+    },
+    "position_3d": {
+      "x": 724.53,
+      "y": 210.48,
+      "z": 27.9
+    },
+    "distance_kpc": 755,
+    "distance_uncertainty_kpc": 37.8,
+    "size_estimate_kpc": 3.2,
+    "morphological_type": "Irr",
+    "notes": "Isolated irregular galaxy",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "ngc_6822",
+    "name": "NGC 6822",
+    "alternate_names": [
+      "Barnard's Galaxy"
+    ],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "19:44:56.6",
+      "dec": "-14:47:51",
+      "ra_deg": 296.235833,
+      "dec_deg": -14.7975
+    },
+    "position_3d": {
+      "x": 209.43,
+      "y": -424.94,
+      "z": -125.15
+    },
+    "distance_kpc": 490,
+    "distance_uncertainty_kpc": 24.5,
+    "size_estimate_kpc": 2.3,
+    "morphological_type": "Irr",
+    "notes": "Barred irregular galaxy",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "wlm",
+    "name": "WLM",
+    "alternate_names": [
+      "Wolf-Lundmark-Melotte"
+    ],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "00:01:58.2",
+      "dec": "-15:27:39",
+      "ra_deg": 0.4925,
+      "dec_deg": -15.460833
+    },
+    "position_3d": {
+      "x": 934.86,
+      "y": 8.04,
+      "z": -258.58
+    },
+    "distance_kpc": 970,
+    "distance_uncertainty_kpc": 48.5,
+    "size_estimate_kpc": 2.0,
+    "morphological_type": "Irr",
+    "notes": "Isolated dwarf irregular",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "pegasus_dwarf",
+    "name": "Pegasus Dwarf",
+    "alternate_names": [
+      "DDO 216"
+    ],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "23:28:36.3",
+      "dec": "+14:44:35",
+      "ra_deg": 352.15125,
+      "dec_deg": 14.743056
+    },
+    "position_3d": {
+      "x": 881.38,
+      "y": -121.5,
+      "z": 234.13
+    },
+    "distance_kpc": 920,
+    "distance_uncertainty_kpc": 46.0,
+    "size_estimate_kpc": 2.2,
+    "morphological_type": "Irr",
+    "notes": "Irregular dwarf galaxy",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "aquarius_dwarf",
+    "name": "Aquarius Dwarf",
+    "alternate_names": [
+      "DDO 210"
+    ],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "20:46:51.8",
+      "dec": "-12:50:53",
+      "ra_deg": 311.715833,
+      "dec_deg": -12.848056
+    },
+    "position_3d": {
+      "x": 668.24,
+      "y": -749.6,
+      "z": -229.04
+    },
+    "distance_kpc": 1030,
+    "distance_uncertainty_kpc": 51.5,
+    "size_estimate_kpc": 1.9,
+    "morphological_type": "Irr",
+    "notes": "Isolated dwarf irregular",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "sagittarius_dig",
+    "name": "Sagittarius DIG",
+    "alternate_names": [
+      "SagDIG"
+    ],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "19:29:59.0",
+      "dec": "-17:40:41",
+      "ra_deg": 292.495833,
+      "dec_deg": -17.678056
+    },
+    "position_3d": {
+      "x": 388.24,
+      "y": -937.5,
+      "z": -323.41
+    },
+    "distance_kpc": 1065,
+    "distance_uncertainty_kpc": 53.2,
+    "size_estimate_kpc": 1.5,
+    "morphological_type": "Irr",
+    "notes": "Dwarf irregular galaxy",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "leo_a",
+    "name": "Leo A",
+    "alternate_names": [
+      "DDO 69",
+      "Leo III"
+    ],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "09:59:26.5",
+      "dec": "+30:44:47",
+      "ra_deg": 149.860417,
+      "dec_deg": 30.746389
+    },
+    "position_3d": {
+      "x": -593.11,
+      "y": 344.36,
+      "z": 407.97
+    },
+    "distance_kpc": 798,
+    "distance_uncertainty_kpc": 39.9,
+    "size_estimate_kpc": 1.5,
+    "morphological_type": "Irr",
+    "notes": "Gas-rich dwarf irregular",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "phoenix_dwarf",
+    "name": "Phoenix Dwarf",
+    "alternate_names": [],
+    "type": "Irr",
+    "coordinates": {
+      "ra": "01:51:06.3",
+      "dec": "-44:26:41",
+      "ra_deg": 27.77625,
+      "dec_deg": -44.444722
+    },
+    "position_3d": {
+      "x": 262.14,
+      "y": 138.07,
+      "z": -290.59
+    },
+    "distance_kpc": 415,
+    "distance_uncertainty_kpc": 20.8,
+    "size_estimate_kpc": 1.1,
+    "morphological_type": "Irr",
+    "notes": "Dwarf irregular galaxy",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "tucana_dwarf",
+    "name": "Tucana Dwarf",
+    "alternate_names": [],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "22:41:49",
+      "dec": "-64:25:12",
+      "ra_deg": 340.454167,
+      "dec_deg": -64.42
+    },
+    "position_3d": {
+      "x": 353.99,
+      "y": -125.67,
+      "z": -784.73
+    },
+    "distance_kpc": 870,
+    "distance_uncertainty_kpc": 43.5,
+    "size_estimate_kpc": 0.55,
+    "morphological_type": "dSph",
+    "notes": "Isolated dwarf spheroidal",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "cetus_dwarf",
+    "name": "Cetus Dwarf",
+    "alternate_names": [],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "00:26:11",
+      "dec": "-11:02:40",
+      "ra_deg": 6.545833,
+      "dec_deg": -11.044444
+    },
+    "position_3d": {
+      "x": 755.69,
+      "y": 86.71,
+      "z": -148.47
+    },
+    "distance_kpc": 775,
+    "distance_uncertainty_kpc": 38.8,
+    "size_estimate_kpc": 0.75,
+    "morphological_type": "dSph",
+    "notes": "Isolated dwarf spheroidal",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "segue_1",
+    "name": "Segue 1",
+    "alternate_names": [],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "10:07:04",
+      "dec": "+16:04:55",
+      "ra_deg": 151.766667,
+      "dec_deg": 16.081944
+    },
+    "position_3d": {
+      "x": -19.47,
+      "y": 10.45,
+      "z": 6.37
+    },
+    "distance_kpc": 23,
+    "distance_uncertainty_kpc": 1.2,
+    "size_estimate_kpc": 0.029,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf, most dark matter dominated",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "boötes_i",
+    "name": "Boötes I",
+    "alternate_names": [
+      "Boo I"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "14:00:06",
+      "dec": "+14:30:00",
+      "ra_deg": 210.025,
+      "dec_deg": 14.5
+    },
+    "position_3d": {
+      "x": -50.29,
+      "y": -29.07,
+      "z": 15.02
+    },
+    "distance_kpc": 60,
+    "distance_uncertainty_kpc": 3.0,
+    "size_estimate_kpc": 0.24,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "ursa_major_i",
+    "name": "Ursa Major I",
+    "alternate_names": [
+      "UMa I"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "10:34:53",
+      "dec": "+51:55:12",
+      "ra_deg": 158.720833,
+      "dec_deg": 51.92
+    },
+    "position_3d": {
+      "x": -55.75,
+      "y": 21.71,
+      "z": 76.35
+    },
+    "distance_kpc": 97,
+    "distance_uncertainty_kpc": 4.9,
+    "size_estimate_kpc": 0.32,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "ursa_major_ii",
+    "name": "Ursa Major II",
+    "alternate_names": [
+      "UMa II"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "08:51:30",
+      "dec": "+63:07:48",
+      "ra_deg": 132.875,
+      "dec_deg": 63.13
+    },
+    "position_3d": {
+      "x": -9.84,
+      "y": 10.6,
+      "z": 28.55
+    },
+    "distance_kpc": 32,
+    "distance_uncertainty_kpc": 1.6,
+    "size_estimate_kpc": 0.14,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "leo_iv",
+    "name": "Leo IV",
+    "alternate_names": [],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "11:32:57",
+      "dec": "-00:32:00",
+      "ra_deg": 173.2375,
+      "dec_deg": -0.533333
+    },
+    "position_3d": {
+      "x": -152.92,
+      "y": 18.13,
+      "z": -1.43
+    },
+    "distance_kpc": 154,
+    "distance_uncertainty_kpc": 7.7,
+    "size_estimate_kpc": 0.21,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "leo_v",
+    "name": "Leo V",
+    "alternate_names": [],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "11:31:09",
+      "dec": "+02:13:12",
+      "ra_deg": 172.7875,
+      "dec_deg": 2.22
+    },
+    "position_3d": {
+      "x": -176.46,
+      "y": 22.33,
+      "z": 6.9
+    },
+    "distance_kpc": 178,
+    "distance_uncertainty_kpc": 8.9,
+    "size_estimate_kpc": 0.13,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "canes_venatici_i",
+    "name": "Canes Venatici I",
+    "alternate_names": [
+      "CVn I"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "13:28:03",
+      "dec": "+33:33:21",
+      "ra_deg": 202.0125,
+      "dec_deg": 33.555833
+    },
+    "position_3d": {
+      "x": -168.43,
+      "y": -68.09,
+      "z": 120.5
+    },
+    "distance_kpc": 218,
+    "distance_uncertainty_kpc": 10.9,
+    "size_estimate_kpc": 0.55,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "canes_venatici_ii",
+    "name": "Canes Venatici II",
+    "alternate_names": [
+      "CVn II"
+    ],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "12:57:10",
+      "dec": "+34:19:15",
+      "ra_deg": 194.291667,
+      "dec_deg": 34.320833
+    },
+    "position_3d": {
+      "x": -128.05,
+      "y": -32.62,
+      "z": 90.21
+    },
+    "distance_kpc": 160,
+    "distance_uncertainty_kpc": 8.0,
+    "size_estimate_kpc": 0.22,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "hercules",
+    "name": "Hercules",
+    "alternate_names": [],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "16:31:02",
+      "dec": "+12:47:30",
+      "ra_deg": 247.758333,
+      "dec_deg": 12.791667
+    },
+    "position_3d": {
+      "x": -50.94,
+      "y": -124.56,
+      "z": 30.55
+    },
+    "distance_kpc": 138,
+    "distance_uncertainty_kpc": 6.9,
+    "size_estimate_kpc": 0.33,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "leo_t",
+    "name": "Leo T",
+    "alternate_names": [],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "09:34:53",
+      "dec": "+17:03:05",
+      "ra_deg": 143.720833,
+      "dec_deg": 17.051389
+    },
+    "position_3d": {
+      "x": -321.38,
+      "y": 235.9,
+      "z": 122.28
+    },
+    "distance_kpc": 417,
+    "distance_uncertainty_kpc": 20.9,
+    "size_estimate_kpc": 0.18,
+    "morphological_type": "dSph",
+    "notes": "Gas-rich ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  },
+  {
+    "id": "coma_berenices",
+    "name": "Coma Berenices",
+    "alternate_names": [],
+    "type": "dSph",
+    "coordinates": {
+      "ra": "12:26:59",
+      "dec": "+23:54:15",
+      "ra_deg": 186.745833,
+      "dec_deg": 23.904167
+    },
+    "position_3d": {
+      "x": -39.95,
+      "y": -4.73,
+      "z": 17.83
+    },
+    "distance_kpc": 44,
+    "distance_uncertainty_kpc": 2.2,
+    "size_estimate_kpc": 0.08,
+    "morphological_type": "dSph",
+    "notes": "Ultra-faint dwarf",
+    "source": "Caltech NED / McConnachie 2012",
+    "source_url": "https://ned.ipac.caltech.edu/level5/Mateo/table1.html",
+    "citation": "McConnachie, A. W. 2012, AJ, 144, 4"
+  }
+]

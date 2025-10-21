@@ -1,0 +1,46 @@
+.controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 1000;
+}
+
+/* M3 FAB style for control buttons */
+.control-btn {
+  width: 56px;
+  height: 56px;
+  background: var(--md-sys-color-secondary-container);
+  border: none;
+  border-radius: var(--md-sys-shape-corner-large);
+  box-shadow: var(--md-sys-elevation-2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.control-btn:hover {
+  box-shadow: var(--md-sys-elevation-3);
+  transform: scale(1.05);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.control-btn.active {
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  box-shadow: var(--md-sys-elevation-3);
+}
+
+.control-btn svg {
+  display: block;
+  color: currentColor;
+}
