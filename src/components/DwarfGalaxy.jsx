@@ -25,9 +25,9 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
   
   const isSelected = selectedGalaxy?.id === galaxy.id;
   
-  // Galaxy parameters - adjusted for better visual spread
-  const galaxyRadius = Math.max(galaxy.size_estimate_kpc * 0.3, 2); // Larger radius for better spread
-  const particleCount = Math.min(Math.floor(galaxy.size_estimate_kpc * 80), 2000); // More particles but capped lower
+  // Galaxy parameters - optimized for cloud-like nebulous appearance
+  const galaxyRadius = Math.max(galaxy.size_estimate_kpc * 0.35, 2.5); // Larger for cloud spread
+  const particleCount = Math.min(Math.floor(galaxy.size_estimate_kpc * 120), 4000); // More particles for cloud density
   
   // Generate random orientation for this galaxy (seeded by galaxy ID for consistency)
   const { rotation, positions, colors, sizes } = useMemo(() => {
@@ -56,19 +56,23 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
     // Determine distribution shape based on galaxy type
     let distribution = 'spheroidal'; // default
     let flatteningFactor = 1.0;
+    let randomnessFactor = 0.3; // Base randomness for cloud effect
     
     if (galaxy.type.toLowerCase().includes('sph')) {
-      // Dwarf spheroidal - slightly flattened sphere
+      // Dwarf spheroidal - slightly flattened cloud
       distribution = 'spheroidal';
-      flatteningFactor = 0.6; // Flatten along y-axis
+      flatteningFactor = 0.6;
+      randomnessFactor = 0.35;
     } else if (galaxy.type.toLowerCase().includes('de')) {
-      // Dwarf elliptical - more spherical
+      // Dwarf elliptical - rounder cloud
       distribution = 'elliptical';
       flatteningFactor = 0.8;
+      randomnessFactor = 0.3;
     } else if (galaxy.type.toLowerCase().includes('irr')) {
-      // Irregular - very chaotic
+      // Irregular - very chaotic, wispy cloud
       distribution = 'irregular';
       flatteningFactor = 0.5;
+      randomnessFactor = 0.6; // Very wispy and chaotic
     }
     
     for (let i = 0; i < particleCount; i++) {
@@ -78,8 +82,8 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
       let x, y, z, radius;
       
       if (distribution === 'irregular') {
-        // Very random, chaotic distribution - more spread out
-        radius = Math.pow(Math.random(), 1.2) * galaxyRadius; // Less concentrated
+        // Very random, chaotic cloud distribution
+        radius = Math.pow(Math.random(), 1.0) * galaxyRadius; // Even spread
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos(Math.random() * 2 - 1);
         
@@ -87,13 +91,13 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
         y = radius * Math.sin(phi) * Math.sin(theta) * flatteningFactor;
         z = radius * Math.cos(phi);
         
-        // Add extra randomness for messy appearance
-        x += (Math.random() - 0.5) * galaxyRadius * 0.6;
-        y += (Math.random() - 0.5) * galaxyRadius * 0.6;
-        z += (Math.random() - 0.5) * galaxyRadius * 0.6;
+        // High randomness for chaotic wispy cloud
+        x += (Math.random() - 0.5) * galaxyRadius * randomnessFactor * 2;
+        y += (Math.random() - 0.5) * galaxyRadius * randomnessFactor * 2;
+        z += (Math.random() - 0.5) * galaxyRadius * randomnessFactor * 2;
       } else {
-        // Spheroidal/elliptical - more spread out, less clumped
-        radius = Math.pow(Math.random(), 1.5) * galaxyRadius; // Less concentrated than before
+        // Spheroidal/elliptical - soft cloud with gentle falloff
+        radius = Math.pow(Math.random(), 1.3) * galaxyRadius; // Gentle concentration
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos(Math.random() * 2 - 1);
         
@@ -101,11 +105,10 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
         y = radius * Math.sin(phi) * Math.sin(theta) * flatteningFactor;
         z = radius * Math.cos(phi);
         
-        // More randomness for better spread
-        const randomFactor = 0.25; // Increased from 0.15
-        x += (Math.random() - 0.5) * galaxyRadius * randomFactor;
-        y += (Math.random() - 0.5) * galaxyRadius * randomFactor;
-        z += (Math.random() - 0.5) * galaxyRadius * randomFactor;
+        // Cloud-like randomness
+        x += (Math.random() - 0.5) * galaxyRadius * randomnessFactor;
+        y += (Math.random() - 0.5) * galaxyRadius * randomnessFactor;
+        z += (Math.random() - 0.5) * galaxyRadius * randomnessFactor;
       }
       
       positions[i3] = x;
@@ -129,8 +132,10 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
       colors[i3 + 1] = mixedColor.g;
       colors[i3 + 2] = mixedColor.b;
       
-      // Size varies with distance from center - more variation
-      sizes[i] = Math.max(0.1, (1 - normalizedRadius) * 2 + Math.random() * 0.5);
+      // Highly variable sizes for nebulous cloud appearance
+      const baseSizeByRadius = (1 - normalizedRadius) * 3;
+      const randomVariation = Math.random() * 1.5;
+      sizes[i] = Math.max(0.15, baseSizeByRadius + randomVariation);
     }
     
     return { rotation, positions, colors, sizes };
@@ -208,10 +213,10 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
             />
           </bufferGeometry>
         <pointsMaterial
-          size={0.3}
+          size={0.35}
           vertexColors
           transparent
-          opacity={isSelected || hovered ? 0.9 : 0.7}
+          opacity={isSelected || hovered ? 0.85 : 0.7}
           sizeAttenuation={true}
           depthWrite={false}
           blending={THREE.AdditiveBlending}

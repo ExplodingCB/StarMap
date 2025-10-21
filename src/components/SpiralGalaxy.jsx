@@ -25,9 +25,9 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
   
   const isSelected = selectedGalaxy?.id === galaxy.id;
   
-  // Galaxy parameters based on size and type
+  // Galaxy parameters based on size and type - optimized for cloud-like appearance
   const galaxyRadius = galaxy.size_estimate_kpc * 0.15;
-  const particleCount = Math.min(Math.floor(galaxy.size_estimate_kpc * 150), 20000);
+  const particleCount = Math.min(Math.floor(galaxy.size_estimate_kpc * 200), 25000); // More particles for cloud effect
   
   // Generate spiral galaxy particle positions
   const { positions, colors, sizes } = useMemo(() => {
@@ -40,28 +40,28 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
     const midColor = new THREE.Color(getGalaxyColor(galaxy.type));
     const outerColor = new THREE.Color(getGalaxyColor(galaxy.type)).multiplyScalar(0.3);
     
-    // Spiral parameters - vary by galaxy type
+    // Spiral parameters - vary by galaxy type with more randomness for cloud effect
     let branches = 2;
     let spin = 1.2;
-    let randomness = 0.25;
-    let randomnessPower = 3.5;
+    let randomness = 0.4; // Increased for wispy clouds
+    let randomnessPower = 2.5; // Lower for more spread
     
     // Customize based on galaxy type
     if (galaxy.type === 'Sc') {
       // More open, loosely wound spirals (like M33)
       branches = 2;
       spin = 0.8;
-      randomness = 0.35;
+      randomness = 0.5; // Very wispy
     } else if (galaxy.type === 'Sb') {
       // Tightly wound spirals (like Andromeda)
       branches = 2;
       spin = 1.5;
-      randomness = 0.2;
+      randomness = 0.35; // Still defined but softer
     } else if (galaxy.type.includes('SB')) {
       // Barred spirals (like Milky Way)
       branches = 2;
       spin = 1.0;
-      randomness = 0.25;
+      randomness = 0.4; // Nebulous arms
     }
     
     for (let i = 0; i < particleCount; i++) {
@@ -102,8 +102,10 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
       colors[i3 + 1] = mixedColor.g;
       colors[i3 + 2] = mixedColor.b;
       
-      // Size based on distance (larger in center, with variation)
-      sizes[i] = Math.max(0.08, (1 - normalizedRadius) * 2.5 + Math.random() * 0.3);
+      // Highly variable sizes for cloud-like nebulous appearance
+      const baseSizeByRadius = (1 - normalizedRadius) * 4;
+      const randomVariation = Math.random() * 2;
+      sizes[i] = Math.max(0.2, baseSizeByRadius + randomVariation);
     }
     
     return { positions, colors, sizes };
@@ -154,7 +156,7 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
       onPointerOver={handlePointerOver}
       onPointerOut={handlePointerOut}
     >
-      {/* Particle system */}
+      {/* Particle cloud system */}
       <points ref={particlesRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -177,10 +179,10 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.25}
+          size={0.35}
           vertexColors
           transparent
-          opacity={isSelected || hovered ? 1.0 : 0.85}
+          opacity={isSelected || hovered ? 0.8 : 0.65}
           sizeAttenuation={true}
           depthWrite={false}
           blending={THREE.AdditiveBlending}

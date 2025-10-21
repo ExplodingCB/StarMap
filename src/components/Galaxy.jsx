@@ -73,23 +73,33 @@ export function Galaxy({ galaxy, cameraPosition }) {
         onPointerOver={handlePointerOver}
         onPointerOut={handlePointerOut}
       >
-        <sphereGeometry args={[size, 16, 16]} />
+        <sphereGeometry args={[size, 24, 24]} />
         <meshStandardMaterial
           color={color}
           emissive={color}
-          emissiveIntensity={isSelected || hovered ? 0.8 : 0.3}
+          emissiveIntensity={isSelected || hovered ? 0.6 : 0.4}
           transparent
-          opacity={0.9}
+          opacity={0.7}
         />
       </mesh>
       
-      {/* Glow effect */}
-      <mesh scale={[1.3, 1.3, 1.3]}>
+      {/* Multi-layer glow for cloud-like appearance */}
+      <mesh scale={[1.4, 1.4, 1.4]}>
         <sphereGeometry args={[size, 16, 16]} />
         <meshBasicMaterial
           color={color}
           transparent
-          opacity={isSelected || hovered ? 0.3 : 0.15}
+          opacity={isSelected || hovered ? 0.25 : 0.15}
+        />
+      </mesh>
+      
+      {/* Outer halo */}
+      <mesh scale={[1.8, 1.8, 1.8]}>
+        <sphereGeometry args={[size, 16, 16]} />
+        <meshBasicMaterial
+          color={color}
+          transparent
+          opacity={isSelected || hovered ? 0.15 : 0.08}
         />
       </mesh>
       
