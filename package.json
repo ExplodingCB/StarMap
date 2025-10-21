@@ -14,8 +14,7 @@
     "@react-three/fiber": "^8.15.12",
     "@react-three/drei": "^9.92.7",
     "three": "^0.160.0",
-    "zustand": "^4.4.7",
-    "@material-design-icons/svg": "^1.1.9"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.47",
@@ -24,4 +23,3 @@
     "vite": "^5.0.11"
   }
 }
-

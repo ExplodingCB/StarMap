@@ -5,6 +5,7 @@ import { getGalaxyColor } from '../utils/colorMapping';
 import { shouldRenderLabel } from '../utils/sizeMapping';
 import { useAppStore } from '../store/appState';
 import * as THREE from 'three';
+import { GalaxyCloudMaterial } from '../shaders/GalaxyCloudMaterial';
 
 /**
  * Procedural spiral galaxy particle system
@@ -13,6 +14,7 @@ import * as THREE from 'three';
 export function SpiralGalaxy({ galaxy, cameraPosition }) {
   const particlesRef = useRef();
   const groupRef = useRef();
+  const materialRef = useRef();
   const [hovered, setHovered] = useState(false);
   
   const selectedGalaxy = useAppStore(state => state.selectedGalaxy);
@@ -30,10 +32,12 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
   const particleCount = Math.min(Math.floor(galaxy.size_estimate_kpc * 200), 25000); // More particles for cloud effect
   
   // Generate spiral galaxy particle positions
-  const { positions, colors, sizes } = useMemo(() => {
+  const { positions, colors, sizes, intensities, randomness } = useMemo(() => {
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
     const sizes = new Float32Array(particleCount);
+    const intensities = new Float32Array(particleCount);
+    const randomSeeds = new Float32Array(particleCount);
     
     const baseColor = new THREE.Color(getGalaxyColor(galaxy.type));
     const innerColor = new THREE.Color('#ffffee');
@@ -43,7 +47,7 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
     // Spiral parameters - vary by galaxy type with more randomness for cloud effect
     let branches = 2;
     let spin = 1.2;
-    let randomness = 0.4; // Increased for wispy clouds
+    let spreadRandomness = 0.4; // Increased for wispy clouds
     let randomnessPower = 2.5; // Lower for more spread
     
     // Customize based on galaxy type
@@ -51,17 +55,17 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
       // More open, loosely wound spirals (like M33)
       branches = 2;
       spin = 0.8;
-      randomness = 0.5; // Very wispy
+      spreadRandomness = 0.5; // Very wispy
     } else if (galaxy.type === 'Sb') {
       // Tightly wound spirals (like Andromeda)
       branches = 2;
       spin = 1.5;
-      randomness = 0.35; // Still defined but softer
+      spreadRandomness = 0.35; // Still defined but softer
     } else if (galaxy.type.includes('SB')) {
       // Barred spirals (like Milky Way)
       branches = 2;
       spin = 1.0;
-      randomness = 0.4; // Nebulous arms
+      spreadRandomness = 0.4; // Nebulous arms
     }
     
     for (let i = 0; i < particleCount; i++) {
@@ -76,9 +80,9 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
       const angle = branchAngle + spinAngle;
       
       // Random offset with power distribution (more concentrated near center)
-      const randomX = Math.pow(Math.random(), randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * randomness * radius;
-      const randomY = Math.pow(Math.random(), randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * randomness * radius * 0.2;
-      const randomZ = Math.pow(Math.random(), randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * randomness * radius;
+      const randomX = Math.pow(Math.random(), randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * spreadRandomness * radius;
+      const randomY = Math.pow(Math.random(), randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * spreadRandomness * radius * 0.2;
+      const randomZ = Math.pow(Math.random(), randomnessPower) * (Math.random() < 0.5 ? 1 : -1) * spreadRandomness * radius;
       
       // Position in spiral arm
       positions[i3] = Math.cos(angle) * radius + randomX;
@@ -103,12 +107,19 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
       colors[i3 + 2] = mixedColor.b;
       
       // Highly variable sizes for cloud-like nebulous appearance
-      const baseSizeByRadius = (1 - normalizedRadius) * 4;
-      const randomVariation = Math.random() * 2;
-      sizes[i] = Math.max(0.2, baseSizeByRadius + randomVariation);
+      const baseSizeByRadius = (1 - normalizedRadius) * 7;
+      const randomVariation = Math.random() * 3.5;
+      sizes[i] = Math.max(0.6, baseSizeByRadius + randomVariation);
+
+      // Brighter core with gentle falloff
+      const intensityBase = Math.pow(1 - normalizedRadius, 1.3);
+      intensities[i] = THREE.MathUtils.clamp(intensityBase + Math.random() * 0.25, 0.1, 1.0);
+
+      // Randomness seed for shader animation
+      randomSeeds[i] = Math.random();
     }
     
-    return { positions, colors, sizes };
+    return { positions, colors, sizes, intensities, randomness: randomSeeds };
   }, [particleCount, galaxyRadius, galaxy.type]);
   
   // Calculate distance from camera
@@ -123,7 +134,21 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
   // Gentle rotation animation - slower for more realistic appearance
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.02;
+      groupRef.current.rotation.y += delta * 0.018;
+    }
+
+    if (materialRef.current) {
+      materialRef.current.uTime += delta;
+      materialRef.current.uOpacity = THREE.MathUtils.lerp(
+        materialRef.current.uOpacity,
+        isSelected || hovered ? 0.95 : 0.75,
+        0.08,
+      );
+      materialRef.current.uBrightness = THREE.MathUtils.lerp(
+        materialRef.current.uBrightness,
+        isSelected || hovered ? 1.35 : 1.0,
+        0.08,
+      );
     }
   });
   
@@ -177,16 +202,28 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
             array={sizes}
             itemSize={1}
           />
+          <bufferAttribute
+            attach="attributes-intensity"
+            count={intensities.length}
+            array={intensities}
+            itemSize={1}
+          />
+          <bufferAttribute
+            attach="attributes-randomness"
+            count={randomness.length}
+            array={randomness}
+            itemSize={1}
+          />
         </bufferGeometry>
-        <pointsMaterial
-          size={0.35}
+        <galaxyCloudMaterial
+          ref={materialRef}
           vertexColors
           transparent
-          opacity={isSelected || hovered ? 0.8 : 0.65}
-          sizeAttenuation={true}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
-          alphaTest={0.001}
+          uPointMultiplier={220}
+          uOpacity={isSelected || hovered ? 0.95 : 0.75}
+          uBrightness={isSelected || hovered ? 1.35 : 1.0}
         />
       </points>
       
@@ -239,4 +276,3 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
     </group>
   );
 }
-

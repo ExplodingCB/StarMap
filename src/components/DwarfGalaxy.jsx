@@ -5,6 +5,7 @@ import { getGalaxyColor } from '../utils/colorMapping';
 import { shouldRenderLabel } from '../utils/sizeMapping';
 import { useAppStore } from '../store/appState';
 import * as THREE from 'three';
+import { GalaxyCloudMaterial } from '../shaders/GalaxyCloudMaterial';
 
 /**
  * Dwarf galaxy particle system with random orientation
@@ -13,6 +14,7 @@ import * as THREE from 'three';
 export function DwarfGalaxy({ galaxy, cameraPosition }) {
   const particlesRef = useRef();
   const groupRef = useRef();
+  const materialRef = useRef();
   const [hovered, setHovered] = useState(false);
   
   const selectedGalaxy = useAppStore(state => state.selectedGalaxy);
@@ -26,11 +28,11 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
   const isSelected = selectedGalaxy?.id === galaxy.id;
   
   // Galaxy parameters - optimized for cloud-like nebulous appearance
-  const galaxyRadius = Math.max(galaxy.size_estimate_kpc * 0.35, 2.5); // Larger for cloud spread
-  const particleCount = Math.min(Math.floor(galaxy.size_estimate_kpc * 120), 4000); // More particles for cloud density
+  const galaxyRadius = Math.max(galaxy.size_estimate_kpc * 0.4, 2.8); // Slightly larger for soft halo
+  const particleCount = Math.min(Math.floor(galaxy.size_estimate_kpc * 160), 6000); // Denser clouds
   
   // Generate random orientation for this galaxy (seeded by galaxy ID for consistency)
-  const { rotation, positions, colors, sizes } = useMemo(() => {
+  const { rotation, positions, colors, sizes, intensities, randomness } = useMemo(() => {
     // Use galaxy ID as seed for consistent random rotation
     const seed = galaxy.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const seededRandom = (n) => {
@@ -48,6 +50,8 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
     const sizes = new Float32Array(particleCount);
+    const intensities = new Float32Array(particleCount);
+    const randomness = new Float32Array(particleCount);
     
     const baseColor = new THREE.Color(getGalaxyColor(galaxy.type));
     const innerColor = new THREE.Color('#ffffdd');
@@ -133,12 +137,15 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
       colors[i3 + 2] = mixedColor.b;
       
       // Highly variable sizes for nebulous cloud appearance
-      const baseSizeByRadius = (1 - normalizedRadius) * 3;
-      const randomVariation = Math.random() * 1.5;
-      sizes[i] = Math.max(0.15, baseSizeByRadius + randomVariation);
+      const baseSizeByRadius = (1 - normalizedRadius) * 5;
+      const randomVariation = Math.random() * 2.2;
+      sizes[i] = Math.max(0.5, baseSizeByRadius + randomVariation);
+
+      intensities[i] = THREE.MathUtils.clamp(Math.pow(1 - normalizedRadius, 1.6) + Math.random() * 0.2, 0.05, 1.0);
+      randomness[i] = Math.random();
     }
     
-    return { rotation, positions, colors, sizes };
+    return { rotation, positions, colors, sizes, intensities, randomness };
   }, [particleCount, galaxyRadius, galaxy.type, galaxy.id]);
   
   // Calculate distance from camera
@@ -153,7 +160,21 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
   // Very gentle rotation animation
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.01;
+      groupRef.current.rotation.y += delta * 0.008;
+    }
+
+    if (materialRef.current) {
+      materialRef.current.uTime += delta * 0.9;
+      materialRef.current.uOpacity = THREE.MathUtils.lerp(
+        materialRef.current.uOpacity,
+        isSelected || hovered ? 0.9 : 0.7,
+        0.08,
+      );
+      materialRef.current.uBrightness = THREE.MathUtils.lerp(
+        materialRef.current.uBrightness,
+        isSelected || hovered ? 1.35 : 1.0,
+        0.08,
+      );
     }
   });
   
@@ -211,16 +232,28 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
               array={sizes}
               itemSize={1}
             />
+            <bufferAttribute
+              attach="attributes-intensity"
+              count={intensities.length}
+              array={intensities}
+              itemSize={1}
+            />
+            <bufferAttribute
+              attach="attributes-randomness"
+              count={randomness.length}
+              array={randomness}
+              itemSize={1}
+            />
           </bufferGeometry>
-        <pointsMaterial
-          size={0.35}
+        <galaxyCloudMaterial
+          ref={materialRef}
           vertexColors
           transparent
-          opacity={isSelected || hovered ? 0.85 : 0.7}
-          sizeAttenuation={true}
           depthWrite={false}
           blending={THREE.AdditiveBlending}
-          alphaTest={0.001}
+          uPointMultiplier={200}
+          uOpacity={isSelected || hovered ? 0.9 : 0.7}
+          uBrightness={isSelected || hovered ? 1.35 : 1.0}
         />
         </points>
         
@@ -274,4 +307,3 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
     </group>
   );
 }
-

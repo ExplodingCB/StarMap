@@ -9,6 +9,7 @@ import { CoordinateGrid } from './CoordinateGrid';
 import { useAppStore, useFilteredGalaxies } from '../store/appState';
 import { CAMERA_FOV, CAMERA_NEAR, CAMERA_FAR } from '../utils/constants';
 import { useState, useRef } from 'react';
+import { EllipticalGalaxy } from './EllipticalGalaxy';
 
 /**
  * Easing function - ease in-out cubic (Google Earth style)
@@ -183,7 +184,7 @@ export function Map3D() {
       
       {/* Galaxies */}
       {galaxies.map(galaxy => {
-        const type = galaxy.type.toLowerCase();
+        const type = (galaxy.type || '').toLowerCase();
         
         // Check if this is a spiral galaxy
         const isSpiral = type.startsWith('s') && 
@@ -194,11 +195,21 @@ export function Map3D() {
         const isDwarfOrIrregular = type.startsWith('d') || 
                                    type.includes('sph') || 
                                    type.includes('irr');
+
+        const isElliptical = type.startsWith('e') && !type.startsWith('em');
         
         // Choose appropriate component
         if (isSpiral) {
           return (
             <SpiralGalaxy
+              key={galaxy.id}
+              galaxy={galaxy}
+              cameraPosition={currentCameraPos}
+            />
+          );
+        } else if (isElliptical) {
+          return (
+            <EllipticalGalaxy
               key={galaxy.id}
               galaxy={galaxy}
               cameraPosition={currentCameraPos}
@@ -234,4 +245,3 @@ export function Map3D() {
     </Canvas>
   );
 }
-
