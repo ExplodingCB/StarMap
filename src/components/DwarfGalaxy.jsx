@@ -25,9 +25,9 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
   
   const isSelected = selectedGalaxy?.id === galaxy.id;
   
-  // Galaxy parameters - much smaller than spirals
-  const galaxyRadius = galaxy.size_estimate_kpc * 0.2;
-  const particleCount = Math.min(Math.floor(galaxy.size_estimate_kpc * 50), 3000);
+  // Galaxy parameters - adjusted for better visual spread
+  const galaxyRadius = Math.max(galaxy.size_estimate_kpc * 0.3, 2); // Larger radius for better spread
+  const particleCount = Math.min(Math.floor(galaxy.size_estimate_kpc * 80), 2000); // More particles but capped lower
   
   // Generate random orientation for this galaxy (seeded by galaxy ID for consistency)
   const { rotation, positions, colors, sizes } = useMemo(() => {
@@ -78,8 +78,8 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
       let x, y, z, radius;
       
       if (distribution === 'irregular') {
-        // Very random, chaotic distribution
-        radius = Math.pow(Math.random(), 1.5) * galaxyRadius;
+        // Very random, chaotic distribution - more spread out
+        radius = Math.pow(Math.random(), 1.2) * galaxyRadius; // Less concentrated
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos(Math.random() * 2 - 1);
         
@@ -87,13 +87,13 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
         y = radius * Math.sin(phi) * Math.sin(theta) * flatteningFactor;
         z = radius * Math.cos(phi);
         
-        // Add extra randomness
-        x += (Math.random() - 0.5) * galaxyRadius * 0.4;
-        y += (Math.random() - 0.5) * galaxyRadius * 0.4;
-        z += (Math.random() - 0.5) * galaxyRadius * 0.4;
+        // Add extra randomness for messy appearance
+        x += (Math.random() - 0.5) * galaxyRadius * 0.6;
+        y += (Math.random() - 0.5) * galaxyRadius * 0.6;
+        z += (Math.random() - 0.5) * galaxyRadius * 0.6;
       } else {
-        // Spheroidal/elliptical - concentrated toward center
-        radius = Math.pow(Math.random(), 2) * galaxyRadius;
+        // Spheroidal/elliptical - more spread out, less clumped
+        radius = Math.pow(Math.random(), 1.5) * galaxyRadius; // Less concentrated than before
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos(Math.random() * 2 - 1);
         
@@ -101,8 +101,8 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
         y = radius * Math.sin(phi) * Math.sin(theta) * flatteningFactor;
         z = radius * Math.cos(phi);
         
-        // Small amount of randomness
-        const randomFactor = 0.15;
+        // More randomness for better spread
+        const randomFactor = 0.25; // Increased from 0.15
         x += (Math.random() - 0.5) * galaxyRadius * randomFactor;
         y += (Math.random() - 0.5) * galaxyRadius * randomFactor;
         z += (Math.random() - 0.5) * galaxyRadius * randomFactor;
@@ -129,8 +129,8 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
       colors[i3 + 1] = mixedColor.g;
       colors[i3 + 2] = mixedColor.b;
       
-      // Size varies with distance from center
-      sizes[i] = Math.max(0.05, (1 - normalizedRadius) * 1.5 + Math.random() * 0.3);
+      // Size varies with distance from center - more variation
+      sizes[i] = Math.max(0.1, (1 - normalizedRadius) * 2 + Math.random() * 0.5);
     }
     
     return { rotation, positions, colors, sizes };
@@ -207,16 +207,16 @@ export function DwarfGalaxy({ galaxy, cameraPosition }) {
               itemSize={1}
             />
           </bufferGeometry>
-          <pointsMaterial
-            size={0.2}
-            vertexColors
-            transparent
-            opacity={isSelected || hovered ? 0.95 : 0.75}
-            sizeAttenuation={true}
-            depthWrite={false}
-            blending={THREE.AdditiveBlending}
-            alphaTest={0.001}
-          />
+        <pointsMaterial
+          size={0.3}
+          vertexColors
+          transparent
+          opacity={isSelected || hovered ? 0.9 : 0.7}
+          sizeAttenuation={true}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+          alphaTest={0.001}
+        />
         </points>
         
         {/* Small central core */}
