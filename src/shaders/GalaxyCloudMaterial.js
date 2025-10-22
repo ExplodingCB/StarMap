@@ -63,8 +63,8 @@ const fragmentShader = /* glsl */ `
     }
 
     vec3 color = vColor;
-    color *= mix(0.8, 1.35, vIntensity);
-    color += vec3(0.7, 0.72, 0.85) * pow(core, 3.0) * mix(0.2, 0.5, vIntensity);
+    color *= mix(0.65, 0.95, vIntensity);
+    color += vec3(0.35, 0.38, 0.5) * pow(core, 3.0) * mix(0.08, 0.22, vIntensity);
     color *= uBrightness;
 
     gl_FragColor = vec4(color, alpha);
@@ -78,7 +78,7 @@ export const GalaxyCloudMaterial = shaderMaterial(
   {
     uTime: 0,
     uOpacity: 0.75,
-    uBrightness: 1.0,
+    uBrightness: 0.7,
     uPointMultiplier: 180.0,
     uMinSize: 1.0,
     uTwinkleSpeed: 1.2,

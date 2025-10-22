@@ -146,7 +146,7 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
       );
       materialRef.current.uBrightness = THREE.MathUtils.lerp(
         materialRef.current.uBrightness,
-        isSelected || hovered ? 1.35 : 1.0,
+        isSelected || hovered ? 0.85 : 0.65,
         0.08,
       );
     }
@@ -223,7 +223,7 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
           blending={THREE.AdditiveBlending}
           uPointMultiplier={220}
           uOpacity={isSelected || hovered ? 0.95 : 0.75}
-          uBrightness={isSelected || hovered ? 1.35 : 1.0}
+          uBrightness={isSelected || hovered ? 0.85 : 0.65}
         />
       </points>
       
@@ -233,9 +233,9 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
         <meshStandardMaterial
           color={getGalaxyColor(galaxy.type)}
           emissive={getGalaxyColor(galaxy.type)}
-          emissiveIntensity={isSelected || hovered ? 1.0 : 0.6}
+          emissiveIntensity={isSelected || hovered ? 0.7 : 0.4}
           transparent
-          opacity={0.8}
+          opacity={0.7}
         />
       </mesh>
       
@@ -245,7 +245,7 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
         <meshBasicMaterial
           color={getGalaxyColor(galaxy.type)}
           transparent
-          opacity={isSelected || hovered ? 0.4 : 0.2}
+          opacity={isSelected || hovered ? 0.25 : 0.15}
         />
       </mesh>
       
