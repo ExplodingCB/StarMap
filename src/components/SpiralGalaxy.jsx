@@ -6,6 +6,10 @@ import { shouldRenderLabel } from '../utils/sizeMapping';
 import { useAppStore } from '../store/appState';
 import * as THREE from 'three';
 import { GalaxyCloudMaterial } from '../shaders/GalaxyCloudMaterial';
+import { StellarField } from './StellarField';
+import { StarSystem } from './StarSystem';
+import { SolarSystem } from './SolarSystem';
+import { MW_LOD_GALAXY_MAX } from '../utils/constants';
 
 /**
  * Procedural spiral galaxy particle system
@@ -25,7 +29,13 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
   const focusOnGalaxy = useAppStore(state => state.focusOnGalaxy);
   const startOrbit = useAppStore(state => state.startOrbit);
   
+  // LOD system for Milky Way
+  const stars = useAppStore(state => state.stars);
+  const solarSystem = useAppStore(state => state.solarSystem);
+  const showStars = useAppStore(state => state.showStars);
+  
   const isSelected = selectedGalaxy?.id === galaxy.id;
+  const isMilkyWay = galaxy.id === 'milky_way';
   
   // Galaxy parameters based on size and type - optimized for cloud-like appearance
   const galaxyRadius = galaxy.size_estimate_kpc * 0.15;
@@ -131,6 +141,20 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
   
   const showLabel = showLabels && shouldRenderLabel(distanceFromCamera, isSelected);
   
+  // Calculate galaxy opacity for LOD transitions (Milky Way only)
+  const galaxyOpacity = useMemo(() => {
+    if (!isMilkyWay) return 1;
+    
+    // Fade out galaxy when zooming in
+    if (distanceFromCamera > MW_LOD_GALAXY_MAX) return 1;
+    if (distanceFromCamera < MW_LOD_GALAXY_MAX * 0.5) return 0;
+    
+    // Fade out between MAX and 50% of MAX
+    const fadeRange = MW_LOD_GALAXY_MAX * 0.5;
+    const fadeProgress = (distanceFromCamera - MW_LOD_GALAXY_MAX * 0.5) / fadeRange;
+    return Math.max(0, Math.min(1, fadeProgress));
+  }, [isMilkyWay, distanceFromCamera]);
+  
   // Gentle rotation animation - slower for more realistic appearance
   useFrame((state, delta) => {
     if (groupRef.current) {
@@ -139,9 +163,10 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
 
     if (materialRef.current) {
       materialRef.current.uTime += delta;
+      const targetOpacity = (isSelected || hovered ? 0.95 : 0.75) * galaxyOpacity;
       materialRef.current.uOpacity = THREE.MathUtils.lerp(
         materialRef.current.uOpacity,
-        isSelected || hovered ? 0.95 : 0.75,
+        targetOpacity,
         0.08,
       );
       materialRef.current.uBrightness = THREE.MathUtils.lerp(
@@ -272,6 +297,34 @@ export function SpiralGalaxy({ galaxy, cameraPosition }) {
         >
           {galaxy.name}
         </Text>
+      )}
+      
+      {/* LOD System - Milky Way only */}
+      {isMilkyWay && showStars && (
+        <>
+          {/* LOD Level 2: Stellar Field (10-100 kpc) */}
+          <StellarField 
+            stars={stars}
+            cameraPosition={cameraPosition}
+          />
+          
+          {/* LOD Level 3: Individual Star Systems (0.1-10 kpc) */}
+          {stars.map(star => (
+            <StarSystem
+              key={star.id}
+              star={star}
+              cameraPosition={cameraPosition}
+            />
+          ))}
+          
+          {/* LOD Level 4: Solar System Detail (< 1 kpc) */}
+          {solarSystem && (
+            <SolarSystem
+              solarSystem={solarSystem}
+              cameraPosition={cameraPosition}
+            />
+          )}
+        </>
       )}
     </group>
   );

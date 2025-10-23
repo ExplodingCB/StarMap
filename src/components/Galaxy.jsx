@@ -1,10 +1,12 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Text } from '@react-three/drei';
+import { Html } from '@react-three/drei';
 import { getGalaxyColor } from '../utils/colorMapping';
 import { calculateGalaxySize, shouldRenderLabel } from '../utils/sizeMapping';
 import { useAppStore } from '../store/appState';
 import * as THREE from 'three';
+import { formatDistance } from '../services/distanceCalculator';
+import './Galaxy.css';
 
 /**
  * Individual galaxy component
@@ -35,6 +37,34 @@ export function Galaxy({ galaxy, cameraPosition }) {
   ) : 1000;
   
   const showLabel = showLabels && shouldRenderLabel(distanceFromCamera, isSelected);
+  const labelClassName = useMemo(() => {
+    const classes = ['galaxy-label'];
+    if (isSelected) classes.push('galaxy-label--active');
+    if (hovered) classes.push('galaxy-label--hover');
+    return classes.join(' ');
+  }, [isSelected, hovered]);
+  
+  const labelDistanceFactor = useMemo(() => {
+    if (!distanceFromCamera) return 18;
+    return Math.min(26, Math.max(12, distanceFromCamera / 18));
+  }, [distanceFromCamera]);
+  
+  const typeLabel = galaxy.morphological_type || galaxy.type || 'Galaxy';
+  const distanceLabel = useMemo(() => {
+    if (typeof galaxy.distance_kpc !== 'number') return null;
+    return formatDistance(galaxy.distance_kpc);
+  }, [galaxy.distance_kpc]);
+  
+  const connectorStart = size * 0.95;
+  const labelAnchor = useMemo(() => {
+    const base = size + 2.2;
+    return Math.min(9.5, Math.max(connectorStart + 1.4, base));
+  }, [size, connectorStart]);
+  const connectorHeight = Math.max(labelAnchor - connectorStart, 0.6);
+  const connectorMid = connectorStart + connectorHeight / 2;
+  const connectorThickness = Math.min(0.12, Math.max(0.04, size * 0.05));
+  const anchorSize = Math.max(0.35, Math.min(0.8, size * 0.4));
+  const pinColor = isSelected ? '#1a73e8' : '#3b82f6';
   
   // Gentle rotation animation
   useFrame((state, delta) => {
@@ -113,21 +143,71 @@ export function Galaxy({ galaxy, cameraPosition }) {
       
       {/* Label - billboarded to always face camera */}
       {showLabel && (
-        <Text
-          position={[0, size * 1.5, 0]}
-          fontSize={Math.max(size * 0.8, 2)}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
-          outlineWidth={0.15}
-          outlineColor="#000000"
-          outlineOpacity={0.8}
-          fillOpacity={1}
-        >
-          {galaxy.name}
-        </Text>
+        <group>
+          {/* Slim connector to visually link the badge to the galaxy */}
+          <mesh position={[0, connectorMid, 0]}>
+            <cylinderGeometry args={[connectorThickness, connectorThickness, connectorHeight, 20]} />
+            <meshStandardMaterial
+              color="#2563eb"
+              transparent
+              opacity={0.75}
+              emissive="#2563eb"
+              emissiveIntensity={0.35}
+            />
+          </mesh>
+          
+          {/* Accent glow just beneath the label */}
+          <mesh position={[0, labelAnchor + 0.2, 0]}>
+            <sphereGeometry args={[connectorThickness * 2.4, 16, 16]} />
+            <meshStandardMaterial
+              color="#c7d2fe"
+              emissive="#93c5fd"
+              emissiveIntensity={0.25}
+              transparent
+              opacity={0.6}
+            />
+          </mesh>
+          
+          {/* Anchoring pin */}
+          <mesh position={[0, connectorStart - anchorSize * 0.35, 0]}>
+            <coneGeometry args={[anchorSize * 0.6, anchorSize * 1.4, 24]} />
+            <meshStandardMaterial
+              color={pinColor}
+              emissive={pinColor}
+              emissiveIntensity={isSelected ? 0.55 : 0.4}
+              transparent
+              opacity={0.95}
+            />
+          </mesh>
+          <mesh position={[0, connectorStart + anchorSize * 0.25, 0]}>
+            <sphereGeometry args={[anchorSize * 0.65, 24, 24]} />
+            <meshStandardMaterial
+              color="#ffffff"
+              emissive="#bfdbfe"
+              emissiveIntensity={0.45}
+            />
+          </mesh>
+          
+          <Html
+            position={[0, labelAnchor, 0]}
+            sprite
+            distanceFactor={labelDistanceFactor}
+            pointerEvents="none"
+          >
+            <div className={labelClassName}>
+              <div className="galaxy-label__indicator" />
+              <div className="galaxy-label__content">
+                <div className="galaxy-label__name">{galaxy.name}</div>
+                <div className="galaxy-label__meta">
+                  <span>{typeLabel}</span>
+                  {distanceLabel && <span className="galaxy-label__separator">•</span>}
+                  {distanceLabel && <span>{distanceLabel}</span>}
+                </div>
+              </div>
+            </div>
+          </Html>
+        </group>
       )}
     </group>
   );
 }
-

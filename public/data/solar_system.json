@@ -1,0 +1,109 @@
+{
+  "id": "sol",
+  "name": "Solar System",
+  "star": {
+    "name": "Sun",
+    "spectralType": "G2V",
+    "mass": 1.0,
+    "radius": 1.0,
+    "temperature": 5778,
+    "luminosity": 1.0,
+    "color": "#FDB813"
+  },
+  "position": {
+    "x": 8.0,
+    "y": 0.0,
+    "z": 0.02
+  },
+  "planets": [
+    {
+      "id": "mercury",
+      "name": "Mercury",
+      "type": "terrestrial",
+      "radius": 0.383,
+      "mass": 0.055,
+      "semiMajorAxis": 0.00000387,
+      "orbitalPeriod": 0.24,
+      "color": "#8C7853",
+      "description": "The smallest and innermost planet in the Solar System"
+    },
+    {
+      "id": "venus",
+      "name": "Venus",
+      "type": "terrestrial",
+      "radius": 0.949,
+      "mass": 0.815,
+      "semiMajorAxis": 0.00000723,
+      "orbitalPeriod": 0.615,
+      "color": "#FFC649",
+      "description": "The second planet from the Sun, known for its thick atmosphere"
+    },
+    {
+      "id": "earth",
+      "name": "Earth",
+      "type": "terrestrial",
+      "radius": 1.0,
+      "mass": 1.0,
+      "semiMajorAxis": 0.00001,
+      "orbitalPeriod": 1.0,
+      "color": "#4169E1",
+      "description": "Our home planet, the only known world with life"
+    },
+    {
+      "id": "mars",
+      "name": "Mars",
+      "type": "terrestrial",
+      "radius": 0.532,
+      "mass": 0.107,
+      "semiMajorAxis": 0.0000152,
+      "orbitalPeriod": 1.88,
+      "color": "#CD5C5C",
+      "description": "The Red Planet, target of many exploration missions"
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "type": "gas_giant",
+      "radius": 11.21,
+      "mass": 317.8,
+      "semiMajorAxis": 0.0000520,
+      "orbitalPeriod": 11.86,
+      "color": "#DAA520",
+      "description": "The largest planet in the Solar System, a gas giant"
+    },
+    {
+      "id": "saturn",
+      "name": "Saturn",
+      "type": "gas_giant",
+      "radius": 9.45,
+      "mass": 95.2,
+      "semiMajorAxis": 0.0000955,
+      "orbitalPeriod": 29.46,
+      "color": "#F4E4C1",
+      "description": "Famous for its prominent ring system"
+    },
+    {
+      "id": "uranus",
+      "name": "Uranus",
+      "type": "ice_giant",
+      "radius": 4.01,
+      "mass": 14.5,
+      "semiMajorAxis": 0.000192,
+      "orbitalPeriod": 84.01,
+      "color": "#4FD0E5",
+      "description": "An ice giant with an unusual tilted axis"
+    },
+    {
+      "id": "neptune",
+      "name": "Neptune",
+      "type": "ice_giant",
+      "radius": 3.88,
+      "mass": 17.1,
+      "semiMajorAxis": 0.000301,
+      "orbitalPeriod": 164.8,
+      "color": "#4169E1",
+      "description": "The outermost planet, known for its deep blue color"
+    }
+  ]
+}
+

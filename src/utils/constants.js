@@ -9,7 +9,7 @@ export const SCENE_SCALE = 1;
 
 // Camera settings
 export const CAMERA_FOV = 75;
-export const CAMERA_NEAR = 0.1;
+export const CAMERA_NEAR = 0.00001;  // Allow extreme zoom for planetary view
 export const CAMERA_FAR = 10000;
 export const CAMERA_DEFAULT_POSITION = [500, 500, 500];
 
@@ -39,4 +39,18 @@ export const ROUTE_SEGMENTS = 64;
 // Performance
 export const LOD_DISTANCES = [0, 100, 500, 1000];
 export const FRUSTUM_CULLING_ENABLED = true;
+
+// Milky Way Zoom LOD Thresholds (in scene units = kpc)
+export const MW_LOD_GALAXY_MAX = 100;      // Show full galaxy when distance > 100 kpc
+export const MW_LOD_STELLAR_MIN = 10;      // Start showing stars when distance < 100 kpc
+export const MW_LOD_STELLAR_MAX = 100;     // Hide stars when distance > 100 kpc
+export const MW_LOD_SYSTEM_MIN = 0.1;      // Start showing individual star systems at < 10 kpc
+export const MW_LOD_SYSTEM_MAX = 10;       // Hide systems when distance > 10 kpc
+export const MW_LOD_PLANET_MIN = 0.001;    // Show planets when < 0.1 kpc (100 pc)
+export const MW_LOD_PLANET_MAX = 1;        // Hide planets when > 1 kpc
+
+// Star rendering
+export const STAR_MIN_SIZE = 0.05;
+export const STAR_MAX_SIZE = 0.5;
+export const STAR_GLOW_SCALE = 2.0;
 

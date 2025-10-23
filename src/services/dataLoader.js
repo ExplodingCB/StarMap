@@ -1,9 +1,13 @@
 /**
- * Data loading service for galaxy data
+ * Data loading service for galaxy, star, and solar system data
  */
+
+import { raDecDistToCartesian, lightYearsToKpc, getSunPosition } from './stellarCoordinates';
 
 let galaxiesCache = null;
 let metadataCache = null;
+let starsCache = null;
+let solarSystemCache = null;
 
 /**
  * Load galaxy data from JSON file
@@ -145,5 +149,117 @@ export async function getStatistics() {
     avgDistance: distances.reduce((a, b) => a + b, 0) / distances.length,
     typeDistribution: types,
   };
+}
+
+/**
+ * Load star catalog from JSON file and convert coordinates
+ * @returns {Promise<Array>} Array of star objects with 3D positions
+ */
+export async function loadStarCatalog() {
+  if (starsCache) {
+    return starsCache;
+  }
+  
+  try {
+    const response = await fetch('/data/nearby_stars.json');
+    if (!response.ok) {
+      throw new Error(`Failed to load stars: ${response.statusText}`);
+    }
+    const stars = await response.json();
+    
+    // Convert coordinates for each star
+    starsCache = stars.map(star => {
+      if (star.isSolarSystem) {
+        // Solar System is at Sun's position
+        const sunPos = getSunPosition();
+        return {
+          ...star,
+          distance_kpc: 0,
+          position_3d: sunPos
+        };
+      }
+      
+      // Convert RA/Dec to galactocentric Cartesian coordinates
+      const distanceKpc = lightYearsToKpc(star.distance_ly);
+      const position = raDecDistToCartesian(star.ra, star.dec, distanceKpc);
+      
+      return {
+        ...star,
+        distance_kpc: distanceKpc,
+        position_3d: position
+      };
+    });
+    
+    return starsCache;
+  } catch (error) {
+    console.error('Error loading star catalog:', error);
+    throw error;
+  }
+}
+
+/**
+ * Load Solar System configuration
+ * @returns {Promise<Object>} Solar System object with planets
+ */
+export async function loadSolarSystem() {
+  if (solarSystemCache) {
+    return solarSystemCache;
+  }
+  
+  try {
+    const response = await fetch('/data/solar_system.json');
+    if (!response.ok) {
+      throw new Error(`Failed to load solar system: ${response.statusText}`);
+    }
+    solarSystemCache = await response.json();
+    
+    // Calculate 3D positions for planets relative to Solar System position
+    const sunPos = getSunPosition();
+    
+    // Add position data to each planet (relative to Sun)
+    solarSystemCache.planets = solarSystemCache.planets.map((planet, index) => {
+      // Simple orbital positioning (can be enhanced later)
+      const angle = (index / solarSystemCache.planets.length) * 2 * Math.PI;
+      const distance = planet.semiMajorAxis;
+      
+      return {
+        ...planet,
+        position_3d: {
+          x: sunPos.x + distance * Math.cos(angle),
+          y: sunPos.y,
+          z: sunPos.z + distance * Math.sin(angle)
+        }
+      };
+    });
+    
+    return solarSystemCache;
+  } catch (error) {
+    console.error('Error loading solar system:', error);
+    throw error;
+  }
+}
+
+/**
+ * Search stars by name
+ * @param {string} query - Search query
+ * @returns {Promise<Array>} Matching stars
+ */
+export async function searchStars(query) {
+  if (!query || query.trim() === '') {
+    return [];
+  }
+  
+  const stars = await loadStarCatalog();
+  const lowerQuery = query.toLowerCase();
+  
+  return stars.filter(star => {
+    if (star.name.toLowerCase().includes(lowerQuery)) {
+      return true;
+    }
+    if (star.properName && star.properName.toLowerCase().includes(lowerQuery)) {
+      return true;
+    }
+    return false;
+  });
 }
 

@@ -6,7 +6,7 @@ import { DirectionsPanel } from './components/DirectionsPanel';
 import { Legend } from './components/Legend';
 import { Controls } from './components/Controls';
 import { useAppStore } from './store/appState';
-import { loadGalaxies, loadMetadata } from './services/dataLoader';
+import { loadGalaxies, loadMetadata, loadStarCatalog, loadSolarSystem } from './services/dataLoader';
 import './App.css';
 
 /**
@@ -15,28 +15,36 @@ import './App.css';
 function App() {
   const setGalaxies = useAppStore(state => state.setGalaxies);
   const setMetadata = useAppStore(state => state.setMetadata);
+  const setStars = useAppStore(state => state.setStars);
+  const setSolarSystem = useAppStore(state => state.setSolarSystem);
   const galaxies = useAppStore(state => state.galaxies);
   
-  // Load galaxy data on mount
+  // Load galaxy, star, and solar system data on mount
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [galaxiesData, metadataData] = await Promise.all([
+        const [galaxiesData, metadataData, starsData, solarSystemData] = await Promise.all([
           loadGalaxies(),
           loadMetadata(),
+          loadStarCatalog(),
+          loadSolarSystem(),
         ]);
         
         setGalaxies(galaxiesData);
         setMetadata(metadataData);
+        setStars(starsData);
+        setSolarSystem(solarSystemData);
         
         console.log(`✨ Loaded ${galaxiesData.length} galaxies`);
+        console.log(`⭐ Loaded ${starsData.length} nearby stars`);
+        console.log(`🌍 Loaded Solar System with ${solarSystemData.planets.length} planets`);
       } catch (error) {
-        console.error('Failed to load galaxy data:', error);
+        console.error('Failed to load data:', error);
       }
     };
     
     loadData();
-  }, [setGalaxies, setMetadata]);
+  }, [setGalaxies, setMetadata, setStars, setSolarSystem]);
   
   // Show loading state
   if (galaxies.length === 0) {

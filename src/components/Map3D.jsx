@@ -136,7 +136,7 @@ function CameraOrbitController() {
       dampingFactor={0.05}
       rotateSpeed={0.5}
       zoomSpeed={0.8}
-      minDistance={10}
+      minDistance={0.0001}  // Allow extreme zoom for planetary detail
       maxDistance={3000}
       onStart={handleInteractionStart}
     />

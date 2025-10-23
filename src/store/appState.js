@@ -11,11 +11,25 @@ export const useAppStore = create((set, get) => ({
   setGalaxies: (galaxies) => set({ galaxies }),
   setMetadata: (metadata) => set({ metadata }),
   
+  // Star and planet data
+  stars: [],
+  solarSystem: null,
+  setStars: (stars) => set({ stars }),
+  setSolarSystem: (solarSystem) => set({ solarSystem }),
+  
   // Selection state
   selectedGalaxy: null,
   hoveredGalaxy: null,
+  selectedStar: null,
+  hoveredStar: null,
+  selectedPlanet: null,
+  hoveredPlanet: null,
   setSelectedGalaxy: (galaxy) => set({ selectedGalaxy: galaxy }),
   setHoveredGalaxy: (galaxy) => set({ hoveredGalaxy: galaxy }),
+  setSelectedStar: (star) => set({ selectedStar: star }),
+  setHoveredStar: (star) => set({ hoveredStar: star }),
+  setSelectedPlanet: (planet) => set({ selectedPlanet: planet }),
+  setHoveredPlanet: (planet) => set({ hoveredPlanet: planet }),
   
   // Route state
   routeStart: null,
@@ -77,6 +91,9 @@ export const useAppStore = create((set, get) => ({
   
   showGrid: false,
   toggleGrid: () => set((state) => ({ showGrid: !state.showGrid })),
+  
+  showStars: true,
+  toggleStars: () => set((state) => ({ showStars: !state.showStars })),
   
   infoPanelOpen: false,
   setInfoPanelOpen: (open) => set({ infoPanelOpen: open }),
@@ -207,6 +224,80 @@ export const useAppStore = create((set, get) => ({
       cameraAnimationProgress: 0,
       cameraAnimating: true,
       selectedGalaxy: galaxy,
+      infoPanelOpen: true,
+    });
+  },
+  
+  // Focus on a star (move camera to it with animation)
+  focusOnStar: (star) => {
+    if (!star) return;
+    
+    const state = get();
+    const pos = star.position_3d;
+    
+    // Calculate distance based on star type
+    let distance = 0.5; // Default close-up for stars
+    
+    if (star.isSolarSystem) {
+      distance = 0.1; // Closer for Solar System to see planets
+    }
+    
+    // Calculate target camera position
+    const targetPos = [
+      pos.x + Math.cos(0) * distance,
+      pos.y + distance * 0.3,
+      pos.z + Math.sin(0) * distance
+    ];
+    const targetLookAt = [pos.x, pos.y, pos.z];
+    
+    // Set up animation
+    set({
+      cameraAnimationStart: {
+        position: [...state.cameraPosition],
+        target: [...state.cameraTarget],
+      },
+      cameraAnimationEnd: {
+        position: targetPos,
+        target: targetLookAt,
+      },
+      cameraAnimationProgress: 0,
+      cameraAnimating: true,
+      selectedStar: star,
+      infoPanelOpen: true,
+    });
+  },
+  
+  // Focus on a planet (move camera to it with animation)
+  focusOnPlanet: (planet) => {
+    if (!planet) return;
+    
+    const state = get();
+    const pos = planet.position_3d;
+    
+    // Very close for planet detail
+    const distance = 0.01;
+    
+    // Calculate target camera position
+    const targetPos = [
+      pos.x + Math.cos(0) * distance,
+      pos.y + distance * 0.3,
+      pos.z + Math.sin(0) * distance
+    ];
+    const targetLookAt = [pos.x, pos.y, pos.z];
+    
+    // Set up animation
+    set({
+      cameraAnimationStart: {
+        position: [...state.cameraPosition],
+        target: [...state.cameraTarget],
+      },
+      cameraAnimationEnd: {
+        position: targetPos,
+        target: targetLookAt,
+      },
+      cameraAnimationProgress: 0,
+      cameraAnimating: true,
+      selectedPlanet: planet,
       infoPanelOpen: true,
     });
   },

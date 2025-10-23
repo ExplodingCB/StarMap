@@ -1,0 +1,90 @@
+.galaxy-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 18px;
+  border: 1px solid rgba(26, 115, 232, 0.18);
+  box-shadow:
+    0 18px 36px rgba(15, 23, 42, 0.18),
+    0 6px 18px rgba(15, 23, 42, 0.12);
+  transform: translate(-50%, calc(-100% - 14px));
+  backdrop-filter: blur(8px);
+  color: #1f2937;
+  pointer-events: none;
+}
+
+.galaxy-label::before,
+.galaxy-label::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.galaxy-label::before {
+  bottom: -16px;
+  border-width: 0 11px 16px 11px;
+  border-color: transparent transparent rgba(26, 115, 232, 0.18) transparent;
+}
+
+.galaxy-label::after {
+  bottom: -15px;
+  border-width: 0 10px 15px 10px;
+  border-color: transparent transparent rgba(255, 255, 255, 0.94) transparent;
+}
+
+.galaxy-label--hover,
+.galaxy-label--active {
+  border-color: rgba(26, 115, 232, 0.36);
+  box-shadow:
+    0 22px 38px rgba(37, 99, 235, 0.32),
+    0 8px 20px rgba(37, 99, 235, 0.18);
+}
+
+.galaxy-label__indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
+  box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.25);
+  flex-shrink: 0;
+}
+
+.galaxy-label--active .galaxy-label__indicator {
+  background: linear-gradient(135deg, #1a73e8 0%, #5c8dff 100%);
+  box-shadow: 0 0 0 6px rgba(26, 115, 232, 0.28);
+}
+
+.galaxy-label__content {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.galaxy-label__name {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.galaxy-label__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: #4b5563;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+.galaxy-label__separator {
+  color: rgba(37, 99, 235, 0.45);
+}

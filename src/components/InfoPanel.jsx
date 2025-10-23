@@ -4,16 +4,31 @@ import { CloseIcon } from './Icons';
 import './InfoPanel.css';
 
 /**
- * Galaxy information panel - Google Maps style
+ * Information panel - handles galaxies, stars, and planets - Google Maps style
  */
 export function InfoPanel() {
   const selectedGalaxy = useAppStore(state => state.selectedGalaxy);
+  const selectedStar = useAppStore(state => state.selectedStar);
+  const selectedPlanet = useAppStore(state => state.selectedPlanet);
   const infoPanelOpen = useAppStore(state => state.infoPanelOpen);
   const setInfoPanelOpen = useAppStore(state => state.setInfoPanelOpen);
   const setRouteStart = useAppStore(state => state.setRouteStart);
   const setDirectionsPanelOpen = useAppStore(state => state.setDirectionsPanelOpen);
   
-  if (!infoPanelOpen || !selectedGalaxy) {
+  if (!infoPanelOpen) {
+    return null;
+  }
+  
+  // Determine what to display
+  if (selectedPlanet) {
+    return <PlanetInfoPanel planet={selectedPlanet} onClose={() => setInfoPanelOpen(false)} />;
+  }
+  
+  if (selectedStar) {
+    return <StarInfoPanel star={selectedStar} onClose={() => setInfoPanelOpen(false)} />;
+  }
+  
+  if (!selectedGalaxy) {
     return null;
   }
   
@@ -232,6 +247,157 @@ export function InfoPanel() {
               <div className="citation-text">{selectedGalaxy.citation}</div>
             )}
           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Star information panel
+ */
+function StarInfoPanel({ star, onClose }) {
+  return (
+    <div className="info-panel-left">
+      {/* Header */}
+      <div className="info-panel-header">
+        <h2>{star.properName || star.name}</h2>
+        <button className="close-btn" onClick={onClose} aria-label="Close info panel">
+          <CloseIcon size={24} />
+        </button>
+      </div>
+      
+      {/* Star image placeholder */}
+      <div className="galaxy-image-container">
+        <div 
+          className="star-placeholder" 
+          style={{ 
+            background: `radial-gradient(circle, ${star.color || '#FFFFFF'} 0%, rgba(0,0,0,0.9) 70%)`,
+            height: '200px'
+          }}
+        />
+        <div className="image-caption">
+          {star.spectralType} Star
+        </div>
+      </div>
+      
+      {/* Description */}
+      <div className="description-section">
+        <p className="galaxy-description">
+          {star.isSolarSystem 
+            ? 'The Sun is the star at the center of our Solar System. It is a nearly perfect sphere of hot plasma and accounts for 99.86% of the Solar System\'s total mass.'
+            : `${star.properName || star.name} is a ${star.spectralType} spectral type star located approximately ${star.distance_ly.toFixed(2)} light-years from our Solar System.`
+          }
+        </p>
+      </div>
+      
+      {/* Star information */}
+      <div className="info-content">
+        <div className="info-section">
+          <div className="info-label">Spectral Type</div>
+          <div className="info-value">{star.spectralType}</div>
+        </div>
+        
+        <div className="info-section">
+          <div className="info-label">Distance</div>
+          <div className="info-value">
+            {star.distance_ly.toFixed(2)} light-years
+            <span className="info-subvalue">
+              {' '}({star.distance_kpc.toFixed(6)} kpc)
+            </span>
+          </div>
+        </div>
+        
+        <div className="info-section">
+          <div className="info-label">Apparent Magnitude</div>
+          <div className="info-value">{star.apparentMagnitude.toFixed(2)}</div>
+        </div>
+        
+        <div className="info-section">
+          <div className="info-label">Absolute Magnitude</div>
+          <div className="info-value">{star.absoluteMagnitude.toFixed(2)}</div>
+        </div>
+        
+        {star.position_3d && (
+          <div className="info-section">
+            <div className="info-label">3D Position (kpc)</div>
+            <div className="info-value coordinates">
+              <div>X: {star.position_3d.x.toFixed(3)}</div>
+              <div>Y: {star.position_3d.y.toFixed(3)}</div>
+              <div>Z: {star.position_3d.z.toFixed(3)}</div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Planet information panel
+ */
+function PlanetInfoPanel({ planet, onClose }) {
+  return (
+    <div className="info-panel-left">
+      {/* Header */}
+      <div className="info-panel-header">
+        <h2>{planet.name}</h2>
+        <button className="close-btn" onClick={onClose} aria-label="Close info panel">
+          <CloseIcon size={24} />
+        </button>
+      </div>
+      
+      {/* Planet visual placeholder */}
+      <div className="galaxy-image-container">
+        <div 
+          className="planet-placeholder" 
+          style={{ 
+            background: `radial-gradient(circle, ${planet.color} 30%, rgba(0,0,0,0.9) 100%)`,
+            height: '200px'
+          }}
+        />
+        <div className="image-caption">
+          {planet.type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+        </div>
+      </div>
+      
+      {/* Description */}
+      <div className="description-section">
+        <p className="galaxy-description">{planet.description}</p>
+      </div>
+      
+      {/* Planet information */}
+      <div className="info-content">
+        <div className="info-section">
+          <div className="info-label">Type</div>
+          <div className="info-value">
+            {planet.type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+          </div>
+        </div>
+        
+        <div className="info-section">
+          <div className="info-label">Radius (Earth radii)</div>
+          <div className="info-value">{planet.radius.toFixed(3)}</div>
+        </div>
+        
+        <div className="info-section">
+          <div className="info-label">Mass (Earth masses)</div>
+          <div className="info-value">{planet.mass.toFixed(3)}</div>
+        </div>
+        
+        <div className="info-section">
+          <div className="info-label">Orbital Distance</div>
+          <div className="info-value">
+            {(planet.semiMajorAxis * 1000).toFixed(2)} parsecs
+            <span className="info-subvalue">
+              {' '}({(planet.semiMajorAxis * 3260.47).toFixed(0)} light-years)
+            </span>
+          </div>
+        </div>
+        
+        <div className="info-section">
+          <div className="info-label">Orbital Period (Earth years)</div>
+          <div className="info-value">{planet.orbitalPeriod.toFixed(2)}</div>
         </div>
       </div>
     </div>
